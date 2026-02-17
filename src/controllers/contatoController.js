@@ -53,8 +53,10 @@ exports.edit = async function (req, res) {
         const { id } = req.params;
         if (!id) return res.render('404');
         
+
         const contato = new Contato(req.body);
-        const resultado = await contato.edit(id);
+        await contato.edit(id);
+
 
         if (contato.errors.length > 0) {
             req.flash('errors', contato.errors);
@@ -72,8 +74,6 @@ exports.edit = async function (req, res) {
         return res.render('404');
     }
 };
-
-
 
 
 exports.delete = async function (req, res) {
