@@ -37,7 +37,11 @@ class Contato {
         this.valida();
         if (this.errors.length > 0) return;
 
-        await this.userExists();
+        console.log('id', id);
+        console.log('this.body.id', this.body.id);
+
+        await this.userExists(id, this.body.email);
+
         if (this.errors.length > 0) return;
 
         await db.run(
@@ -57,15 +61,22 @@ class Contato {
     }
 
     // Verifica se email já existe
-    async userExists() {
-        const contato = await db.get(
-            `SELECT * FROM contatos
-                 WHERE email = ?`,
-            [this.body.email]
-        );
-        if (contato) this.errors.push(`Há um contato cadastrado com o email informado: ${this.body.email}`);
-    }
+    async userExists(id = null, email) {
+        if (!email) return;
 
+        // Busca qualquer contato com o email informado
+        const contato = await db.get(
+            `SELECT * FROM contatos WHERE email = ?`,
+            [email]
+        );
+
+        const convertId = id ? Number(id): null
+        
+        // Se encontrou e não for o mesmo id que está sendo editado
+        if (contato && contato.id !== convertId) {
+            this.errors.push('Há no banco um contato com este email cadastrado.');
+        }
+    }
     // Buscar por ID
     static async buscarPorId(id) {
         return await db.get(
