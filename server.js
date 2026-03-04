@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -52,9 +51,9 @@ app.use(csrfMiddleware);
 // Rotas
 app.use(routes);
 
-
 const PORT = process.env.PORT || 3000
 // Servidor
 app.listen(PORT,'0.0.0.0', () => {
     console.log(`Servidor executando na porta ${PORT}`);
+
 });
