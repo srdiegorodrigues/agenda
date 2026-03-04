@@ -28,7 +28,7 @@ app.use(session({
     secret: 'asdfasfasf',
     store: new SQLiteStore({
         db: 'sessions.sqlite',
-        dir: './database'
+        dir: './data'
     }),
     resave: false,
     saveUninitialized: false,
