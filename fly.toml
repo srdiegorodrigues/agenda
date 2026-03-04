@@ -9,7 +9,7 @@ primary_region = 'iad'
 [build]
 
 [processes]
-  server = "npm start"
+  app = "npm start"
 
 [[mounts]]
   source = 'data'

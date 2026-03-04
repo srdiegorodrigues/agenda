@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const dbPath =
   process.env.NODE_ENV === 'production'
     ? '/data/contatos.db'
-    : path.resolve(__dirname, 'database', 'contatos.db');
+    : path.resolve(__dirname, 'data', 'contatos.db');
 
 let db;
 
